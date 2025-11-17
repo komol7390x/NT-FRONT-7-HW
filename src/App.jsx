@@ -21,7 +21,7 @@ function App() {
       reset();
       return;
     }
-
+    
     const isDuplicate = userList.some(
       (item) => item.userName === data.userName && item.id !== edit
     );
