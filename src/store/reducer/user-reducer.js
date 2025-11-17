@@ -6,8 +6,9 @@ const initialState = {
 };
 
 const user = createSlice({
-  name: "userList",
+  name: "userReducer",
   initialState,
+
   reducers: {
     addUser: (state, action) => {
       const isAvailable = state.userList.some(
@@ -26,7 +27,6 @@ const user = createSlice({
       const index = state.userList.findIndex((user) => user.id === id);
       if (index === -1) return state;
 
-      // shu username boshqa userga tegishli bo‘lsa update yo‘q
       const isDuplicate = state.userList.some(
         (item) => item.userName === userName && item.id !== id
       );
