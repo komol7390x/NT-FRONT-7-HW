@@ -12,7 +12,10 @@ function App() {
   const [edit, setEditId] = useState(null);
 
   const handler = (data) => {
-    if (!data.userName || data.userName.trim() == '') return
+    if (!data.userName || data.userName.trim() == '') {
+      return
+    }
+
     if (!edit) {
       dispatch(addUser({ ...data, id: nanoid() }));
       reset();
