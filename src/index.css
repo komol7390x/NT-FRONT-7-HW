@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800;900&display=swap');
+
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -42,7 +45,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.25rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
@@ -120,8 +123,17 @@
   }
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 157%;
+}
+
 .container {
   max-width: 1240px;
+  margin-top: 50px;
   padding-right: 20px;
   padding-right: 20px;
   margin-right: auto;

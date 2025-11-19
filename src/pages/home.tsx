@@ -1,9 +1,23 @@
-import { Button } from "@/components/ui/button"
+
+
+import { ButtonIcon } from "./button"
+import { CheckBox } from "./check-box"
+import { GoogleSearch } from "./google-search"
+import { InputIcon } from "./input-icon"
+import { SwitchIcon } from "./switch"
 
 export const Home = () => {
     return (
-        <div className="container">
-            <Button >Button</Button >
+        <div className="container ">
+            <ButtonIcon />
+
+            <InputIcon />
+
+            <CheckBox />
+
+            <GoogleSearch />
+
+            <SwitchIcon />
         </div>
     )
 }
