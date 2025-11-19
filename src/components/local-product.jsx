@@ -1,4 +1,3 @@
-import React from 'react'
 import { formatter } from '../config/formater'
 import { useDispatch } from 'react-redux'
 import { decrementProduct, deleteProduct, incrementProduct } from '../store/reducer/product-reducer'
