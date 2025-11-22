@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 export interface TaskList {
     title: string,
     desc: string,
-    id?: string
+    id?: number
 }
 
 export const taskApi = createApi({
@@ -52,9 +52,9 @@ export const taskApi = createApi({
 
         // --------------------UPDATE ONE--------------------
         updateTaskDetail: build.mutation({
-            query: ({ id, body }: { id: string; body: TaskList }) => ({
+            query: ({ id, body }: { id: number; body: TaskList }) => ({
                 url: `/task/${id}`,
-                method: 'PATCH',
+                method: 'PUT',
                 body,
             }),
             invalidatesTags: ['task_list'],

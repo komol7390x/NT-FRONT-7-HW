@@ -11,6 +11,7 @@ export const Home = () => {
                 {data?.map((item) => (
                     <>
                         <Card key={item.id} {...item} />
+                        
                     </>
                 ))}
             </>}

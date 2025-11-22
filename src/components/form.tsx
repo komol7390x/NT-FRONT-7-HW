@@ -3,6 +3,7 @@ import { useCreateTaskMutation } from "../store/service/user-api"
 
 export interface Inputs {
     title: string,
+    id?: number,
     desc: string
 }
 
