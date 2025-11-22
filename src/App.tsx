@@ -1,12 +1,14 @@
 import { Route, Routes } from "react-router"
+import { Home } from "./pages/home"
+import { TaskDetail } from "./pages/task-detail"
 
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path="/" />
-        <Route path="/task/:id" />
+        <Route path="/" element={<Home />} />
+        <Route path="/task/:id" element={<TaskDetail />} />
       </Routes>
     </>
   )

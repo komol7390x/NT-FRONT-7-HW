@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-interface TaskList {
+export interface TaskList {
     title: string,
     desc: string,
     id?: string
@@ -11,7 +11,7 @@ export const taskApi = createApi({
     tagTypes: ['task_list'],
 
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3333',
+        baseUrl: 'http://localhost:3600',
         headers: {
             Authorization: 'feiwonfeiofieifj2iejfoefm'
         }
@@ -27,7 +27,7 @@ export const taskApi = createApi({
         }),
 
         // --------------------GET ONE--------------------
-        getTaskDetail: build.query<TaskList[], string>({
+        getTaskDetail: build.query<TaskList, string>({
             query: (id: string) => `/task/${id}`
         }),
 
