@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router"
 import { MainLayout } from "./layout/main-layout"
-import { Home } from "./pages/home"
-import { ProductDetail } from "./pages/product-detail"
+import { Home } from "./pages/home/home"
+import { ProductDetail } from "./pages/product-detail/product-detail"
 import { NotFound } from "./pages/not-found"
 
 function App() {
