@@ -13,13 +13,13 @@ import { Spinner } from '../ui/spinner'
 
 
 
-const formSchema = z.object({
+export const formSchema = z.object({
     name: z.string().nonempty().min(2).max(128),
     email: z.email().min(3).nonempty(),
     username: z.string().min(3).max(128).nonempty()
 })
 
-interface DefaultValue {
+export interface DefaultValue {
     name?: string,
     email?: string,
     username?: string,
@@ -82,7 +82,7 @@ export const CreateUser = (defaultValue: DefaultValue) => {
     }
     return (
         <div>
-            <Button className="mt-5 cursor-pointer" onClick={() => setOpen(true)}>
+            <Button className="cursor-pointer" onClick={() => setOpen(true)}>
                 {defaultValue?.id ? "Edit" : "Create"}
             </Button>
 

@@ -40,7 +40,7 @@ app.get("/users", (req, res) => {
 });
 
 // 🔵 READ one
-app.get("/users/:id", (req, res) => {    
+app.get("/users/:id", (req, res) => {
     setTimeout(() => {
         const { id } = req.params;
         let data = readData();
@@ -112,7 +112,7 @@ app.delete("/users/:id", (req, res) => {
         data = data.filter((item) => item.id != id);
         writeData(data);
 
-        res.json({ message: "O'chirildi" });
+        res.json({ message: "O'chirildi", data: {} });
     }, setTime);
 });
 

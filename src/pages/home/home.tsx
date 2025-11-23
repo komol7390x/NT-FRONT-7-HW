@@ -7,7 +7,7 @@ import { Card } from "@/components/card/card"
 export const Home = () => {
   const { data, isLoading } = useGetUserList()
   return (
-    <div className="container">
+    <div className="container my-5">
       <CreateUser />
       {isLoading ? (<>
         <CardLoading />

@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import { useUser } from "./query/useUser"
 import { CreateUser } from "@/components/form/form"
+import { DeleteButton } from "@/components/form/delete"
 
 export const ProductDetail = () => {
     const { id } = useParams()
@@ -16,8 +17,10 @@ export const ProductDetail = () => {
                     <h3 className="text-4xl ">{data?.name}</h3>
                     <p>{data?.email}</p>
                     <p>{data?.username}</p>
-                    <CreateUser email={data?.email} username={data?.username} id={data?.id} name={data?.name} />
-
+                    <div className="flex items-center">
+                        <CreateUser email={data?.email} username={data?.username} id={data?.id} name={data?.name} />
+                        <DeleteButton id={String(data?.id)} />
+                    </div>
                 </div>
 
             )}
