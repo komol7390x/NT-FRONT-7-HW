@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '../ui/button'
-import { Dialog, DialogContent } from '@radix-ui/react-dialog'
+import { Dialog, DialogContent, DialogOverlay } from '@radix-ui/react-dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
 import { Spinner } from '../ui/spinner'
@@ -81,17 +81,20 @@ export const CreateUser = (defaultValue: DefaultValue) => {
         }
     }
     return (
-        < div >
+        <div>
             <Button className="mt-5 cursor-pointer" onClick={() => setOpen(true)}>
-                {defaultValue.id ? "Edit" : "Create"}
+                {defaultValue?.id ? "Edit" : "Create"}
             </Button>
 
-            <div className='w-[300px] mx-auto'>
-                <Dialog onOpenChange={(res) => setOpen(res)} open={open}>
-                    <DialogContent>
+            <div className="w-[300px] mx-auto">
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogOverlay className="fixed inset-0 bg-black/50 backdrop-blur-[3px] z-40" />
+
+                    <DialogContent className="fixed left-1/2 top-1/2 z-50 w-[90%] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-xl">
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
 
+                                {/* Name */}
                                 <FormField
                                     control={form.control}
                                     name="name"
@@ -106,6 +109,7 @@ export const CreateUser = (defaultValue: DefaultValue) => {
                                     )}
                                 />
 
+                                {/* Email */}
                                 <FormField
                                     control={form.control}
                                     name="email"
@@ -120,6 +124,7 @@ export const CreateUser = (defaultValue: DefaultValue) => {
                                     )}
                                 />
 
+                                {/* Username */}
                                 <FormField
                                     control={form.control}
                                     name="username"
@@ -134,9 +139,14 @@ export const CreateUser = (defaultValue: DefaultValue) => {
                                     )}
                                 />
 
-                                <Button className="w-full" type="submit">
-                                    {isPending || updatePending ? <Spinner /> : ""}
-                                    {defaultValue.id ? "Update" : "Submit"}
+                                {/* Submit */}
+                                <Button className="w-full" type="submit" disabled={isPending || updatePending}>
+                                    {(isPending || updatePending) && (
+                                        <>
+                                            <Spinner className="mr-2" />
+                                        </>
+                                    )}
+                                    {defaultValue?.id ? "Update" : "Submit"}
                                 </Button>
                             </form>
                         </Form>
@@ -145,4 +155,5 @@ export const CreateUser = (defaultValue: DefaultValue) => {
             </div>
         </div>
     );
+
 }
