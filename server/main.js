@@ -3,8 +3,10 @@ import fs from "fs";
 import path from "path";
 import cors from 'cors'
 
+
 const app = express();
 app.use(express.json());
+
 app.use(cors())
 
 // data.json manzili
@@ -28,68 +30,80 @@ function readData() {
 function writeData(data) {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
-
+const setTime = 1000
 // 🔵 READ ALL
-app.get("/task", (req, res) => {
-    const data = readData();
-    res.json(data);
+app.get("/users", (req, res) => {
+    setTimeout(() => {
+        const data = readData();
+        res.json(data);
+    }, setTime);
 });
 
 // 🟢 CREATE
-app.post("/task", (req, res) => {
-    const { title, desc } = req.body;
-    if (!title || !desc) {
-        return res.status(400).json({ message: "title va desc kerak" });
-    }
+app.post("/users", (req, res) => {
+    setTimeout(() => {
+        const { name, username, email } = req.body;
+        if (!name || !username || !email) {
+            return res.status(400).json({ message: "username,email va name kerak" });
+        }
 
-    const data = readData();
-    const newPost = {
-        id: Date.now(),
-        title,
-        desc,
-    };
+        const data = readData();
+        const newPost = {
+            id: Date.now(),
+            name,
+            username,
+            email
+        };
 
-    data.push(newPost);
-    writeData(data);
+        data.push(newPost);
+        writeData(data);
 
-    res.json({ message: "Qo'shildi", post: newPost });
+        res.json({ message: "Qo'shildi", post: newPost });
+    }, setTime);
+
 });
 
 // 🟡 UPDATE
-app.put("/task/:id", (req, res) => {
-    const { id } = req.params;
-    const { title, desc } = req.body;
+app.patch("/users/:id", (req, res) => {
+    setTimeout(() => {
+        const { id } = req.params;
+        const { name, username, email } = req.body;
 
-    const data = readData();
-    const index = data.findIndex((p) => p.id == id);
+        const data = readData();
+        const index = data.findIndex((item) => item.id == id);
 
-    if (index === -1) return res.status(404).json({ message: "Topilmadi" });
+        if (index === -1) return res.status(404).json({ message: "Topilmadi" });
 
-    data[index] = {
-        ...data[index],
-        title: title || data[index].title,
-        desc: desc || data[index].desc,
-    };
+        data[index] = {
+            ...data[index],
+            name: name || data[index].name,
+            username: username || data[index].username,
+            email: email || data[index].email
+        };
 
-    writeData(data);
+        writeData(data);
 
-    res.json({ message: "Yangilandi", post: data[index] });
+        res.json({ message: "Yangilandi", post: data[index] });
+    }, setTime);
 });
 
 // 🔴 DELETE
-app.delete("/task/:id", (req, res) => {
-    const { id } = req.params;
+app.delete("/users/:id", (req, res) => {
+    setTimeout(() => {
+        const { id } = req.params;
+        let data = readData();
+        const exist = data.some((item) => item.id == id);
 
-    let data = readData();
-    const exist = data.some((p) => p.id == id);
+        if (!exist) return res.status(404).json({ message: "Topilmadi" });
 
-    if (!exist) return res.status(404).json({ message: "Topilmadi" });
+        data = data.filter((item) => item.id != id);
+        writeData(data);
 
-    data = data.filter((p) => p.id != id);
-    writeData(data);
-
-    res.json({ message: "O\'chirildi" });
+        res.json({ message: "O'chirildi" });
+    }, setTime);
 });
+
 
 const PORT = 3600
 app.listen(PORT, () => console.log("Server is running PORT:", PORT));
+console.log(`http://localhost:${PORT}`)
