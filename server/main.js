@@ -39,6 +39,19 @@ app.get("/users", (req, res) => {
     }, setTime);
 });
 
+// 🔵 READ one
+app.get("/users/:id", (req, res) => {    
+    setTimeout(() => {
+        const { id } = req.params;
+        let data = readData();
+        const exist = data.find((item) => item.id == Number(id));
+
+        if (!exist) return res.status(404).json({ message: "Topilmadi" });
+
+        return res.json(exist);
+    }, setTime);
+});
+
 // 🟢 CREATE
 app.post("/users", (req, res) => {
     setTimeout(() => {
