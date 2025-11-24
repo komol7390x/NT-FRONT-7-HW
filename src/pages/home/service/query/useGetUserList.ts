@@ -18,9 +18,7 @@ export const useGetUserList = (page: number = 1, limit: number = 3) => {
             }
         }).then((res): { data: IUserList[]; pageSize: number } => {
             // @ts-ignore
-
-            const totalCount = Number(res.headers['x-total-count']); // ✔️
-            console.log(totalCount, 22);
+            const totalCount = Number(res.headers['x-total-count']); 
 
             const pageSize = Math.ceil(Number(totalCount / limit))
             return { data: res.data, pageSize }

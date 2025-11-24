@@ -38,11 +38,17 @@ const setTime = 1000
 // 🔵 READ ALL
 app.get("/users", (req, res) => {
     setTimeout(() => {
-        const data = readData(); // barcha userlar
+        let data = readData();
+
+        const search = req.query.name_like?.toLowerCase();
+        if (search) {
+            data = data.filter(user =>
+                user.name.toLowerCase().includes(search)
+            );
+        }
 
         const page = Number(req.query._page) || 1;
         const limit = Number(req.query._limit) || data.length;
-
         const start = (page - 1) * limit;
         const end = start + limit;
 
@@ -50,10 +56,10 @@ app.get("/users", (req, res) => {
 
         res.setHeader("X-Total-Count", data.length);
 
-        // JSON qaytarish
         res.json(paginated);
     }, setTime);
 });
+
 
 // 🔵 READ one
 app.get("/users/:id", (req, res) => {
