@@ -8,13 +8,14 @@ interface UserLIst {
   id: number;
 }
 
-export const useSearch = (str: string) => {
+export const useSearch = (str: string, limit: number = 5) => {
   return useQuery({
     queryKey: ['serch_item', str],
     queryFn: () =>
       request.get<UserLIst[]>('/users', {
         params: {
-          name_like: str
+          name_like: str,
+          _limit: limit
         }
       }).then((res) => res.data)
   }

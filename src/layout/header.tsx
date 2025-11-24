@@ -18,31 +18,35 @@ export const Header = () => {
                 <div className="text-3xl">
                     <Link to={'/'} className="hover:text-white">Home</Link>
                 </div>
-                <Link to={'/users'} className="hover:text-white text-3xl">Users</Link>
-                <div className="w-[400px] relative rounded-[10px]">
+                <Link to={'/users'} className="hover:text-white text-3xl container flex justify-center">Users</Link>
+                <div className="w-[400px] relative rounded-[10px]" >
                     <Input
                         value={input}
                         onChange={(e) => setInput(e.target.value.trim())}
                         placeholder="Search"
                         className="leading-none text-[18px] py-5 bg-white"
                     />
-                    {input ? (<div className=" absolute bg-white rounded-[10px]  w-full p-2.5 shadow top-12 h-10">
-                        {isLoading ? (<Spinner className="size-5" />) : (
-                            <div>
-                                {data?.length ? (
-                                    data.map((item) => (
-                                        <div key={item.id} className="my-2">
-                                            <h2>
-                                                <Link to={`/product/${item.id}`}>{item.name}</Link>
-                                            </h2>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <h2>Not found user</h2>
-                                )}
-                            </div>
-                        )}
-                    </div>) : ''}
+                    {input ? (
+                        <div className="absolute bg-white rounded-[10px] w-full top-12 shadow-xl">
+                            {isLoading ? (<Spinner className="size-5 h-10 mx-auto" />) : (
+                                <div className="">
+                                    {data?.length ? (
+                                        data.map((item) => (
+                                            <div key={item.id} className=" hover:bg-yellow-200 p-2.5 w-full">
+                                                <h2>
+                                                    <Link to={`/product/${item.id}`}>Name: {item.name}
+                                                        <h3>Email: {item.email}</h3>
+                                                        <br />
+                                                    </Link>
+                                                </h2>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <h2 className="p-2.5">Not found user</h2>
+                                    )}
+                                </div>
+                            )}
+                        </div>) : ''}
                 </div>
             </div>
         </div>
