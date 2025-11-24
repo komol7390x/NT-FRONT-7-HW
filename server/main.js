@@ -7,7 +7,11 @@ import cors from 'cors'
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+app.use(
+    cors({
+        exposedHeaders: ["X-Total-Count"]
+    })
+);
 
 // data.json manzili
 const filePath = path.join(process.cwd(), 'data', "data.json");
@@ -34,8 +38,20 @@ const setTime = 1000
 // 🔵 READ ALL
 app.get("/users", (req, res) => {
     setTimeout(() => {
-        const data = readData();
-        res.json(data);
+        const data = readData(); // barcha userlar
+
+        const page = Number(req.query._page) || 1;
+        const limit = Number(req.query._limit) || data.length;
+
+        const start = (page - 1) * limit;
+        const end = start + limit;
+
+        const paginated = data.slice(start, end);
+
+        res.setHeader("X-Total-Count", data.length);
+
+        // JSON qaytarish
+        res.json(paginated);
     }, setTime);
 });
 
