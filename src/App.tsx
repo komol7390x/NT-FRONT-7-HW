@@ -14,7 +14,7 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/app' element={<MainLayout />} >
-          <Route path='user' >
+          <Route path='admin' >
             <Route index element={<Statistica />} />
             {adminPath.map(({ page: Page, path }) => (
               <Route key={path} path={path} element={<Page />} />

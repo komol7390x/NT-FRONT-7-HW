@@ -1,12 +1,15 @@
 import { useMutation } from "@tanstack/react-query"
-import type { ILoginResponse, ILogin } from "../../types"
 import { request } from "@/config/request"
+import type { LoginResponse, LoginT } from "./types"
 
 export const useLogin = () => {
     return useMutation({
-        mutationFn: (data: ILogin) =>
-            request.post<ILoginResponse>('/auth/signin', data, {
+        mutationFn: (data: LoginT) =>
+            request.post<LoginResponse>('/auth/signin', data, {
                 withCredentials: true
-            }).then((res) => res.data)
+            }).then((res) => {
+                return res.data
+            }
+            )
     })
 }

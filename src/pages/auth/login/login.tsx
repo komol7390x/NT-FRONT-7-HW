@@ -24,8 +24,8 @@ export const Login = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
-      password: '',
+      username: 'komol7390x',
+      password: '@Komol7390x',
       role: 'Admin'
     }
   })
@@ -38,10 +38,11 @@ export const Login = () => {
         toast.success(res.message.uz, {
           position: 'top-center'
         });
-        navigate(`app/${res.data.user.role.toLowerCase()}`)
+        navigate(`app/${data.role}`)
       },
       onError: (error) => {
         console.log('Error on Login', error.message)
+        navigate(`/`)
       }
     })
   }
