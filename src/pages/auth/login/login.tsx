@@ -42,7 +42,6 @@ export const Login = () => {
       },
       onError: (error) => {
         console.log('Error on Login', error.message)
-        navigate(`/`)
       }
     })
   }
