@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
 import { links } from "@/data/layout-data";
 
 // Menu items.
@@ -19,6 +20,7 @@ export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
   return (
     <Sidebar>
       <SidebarHeader />
+      <Link to={'/'}>Logo</Link>
       <SidebarContent>
         <SidebarGroupContent>
           <SidebarMenu>
