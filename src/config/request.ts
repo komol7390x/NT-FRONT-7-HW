@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { type ILoginResponse } from '@/pages/auth/types';
 
 export const request = axios.create({ baseURL: configFile.Url });
+
 request.interceptors.request.use((config) => {
     const token = Cookies.get('token')
     if (token) {
@@ -17,6 +18,7 @@ request.interceptors.response.use(
     (response) => {
         return response
     },
+
     async (error) => {
         const orginalRequest = error.config;
         if (error.response.status == 401 && !orginalRequest._retry) {
