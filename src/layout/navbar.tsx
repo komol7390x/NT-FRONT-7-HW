@@ -13,14 +13,16 @@ import {
 } from "@/components/ui/sidebar";
 import { Link } from "react-router-dom";
 import { links } from "@/data/layout-data";
+import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
+import { toast } from "sonner";
 
-// Menu items.
 
 export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
   return (
     <Sidebar>
       <SidebarHeader />
-      <Link to={'/'}>Logo</Link>
+      <Link to={'/'} className="text-4xl">Logo</Link>
       <SidebarContent>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -34,7 +36,23 @@ export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
+
           </SidebarMenu>
+          <div>
+            <Button
+
+              className="mx-auto"
+              onClick={() => {
+                Cookies.remove("token");
+                Cookies.remove("role");
+                toast.success('Siz muffaqqiyatli tark etingiz!', {
+                  position: 'top-center'
+                })
+              }}
+              asChild
+            >
+              <Link to="/">Logout</Link>
+            </Button>          </div>
         </SidebarGroupContent>
       </SidebarContent>
       <SidebarFooter />

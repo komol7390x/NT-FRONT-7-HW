@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input'
 const formSchema = z.object({
   username: z.string().min(2).max(128).trim(),
   password: z.string().trim(),
-  role: z.enum(["Admin", "Teacher"]),
+  role: z.enum(['Admin', 'Teacher']),
 })
 export const Login = () => {
   const { mutate, isPending } = useLogin()
@@ -33,12 +33,24 @@ export const Login = () => {
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     mutate(data, {
       onSuccess: (res) => {
-        Cookies.set('token', res.data.token);
-        Cookies.set('role', res.data.user.role);
-        toast.success(res.message.uz, {
-          position: 'top-center'
-        });
-        navigate(`app/${data.role}`)
+        const { role } = res.data.user
+        const { token } = res.data
+        if (role.toLowerCase() == 'admin' || role.toLowerCase() == 'super_admin') {
+          Cookies.set('token', token)
+          Cookies.set('role', 'admin')
+          toast.success(res.message.uz, {
+            position: 'top-center'
+          });
+          navigate(`/app/admin`)
+
+        } else if (role.toLowerCase() == 'teacher') {
+          Cookies.set('token', token)
+          Cookies.set('role', 'admin')
+          toast.success(res.message.uz, {
+            position: 'top-center'
+          });
+          navigate(`/app/admin`)
+        }
       },
       onError: (error) => {
         console.log('Error on Login', error.message)

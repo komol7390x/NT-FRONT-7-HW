@@ -1,9 +1,20 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import { AppSidebar } from "./navbar"
+import Cookies from "js-cookie";
 
 export const MainLayout = () => {
-    const role = 'admin'
+    const token = Cookies.get("token");
+    const cookieRole = Cookies.get("role")?.toLowerCase();
+
+    const role = cookieRole === "admin" || cookieRole === "teacher"
+        ? cookieRole
+        : null;
+
+    if (!token || !role) {
+        return <Navigate replace to={"/"} />;
+    }
+
     return (
         <SidebarProvider>
             <AppSidebar role={role} />
@@ -14,3 +25,5 @@ export const MainLayout = () => {
         </SidebarProvider>
     )
 }
+
+
