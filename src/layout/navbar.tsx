@@ -20,9 +20,9 @@ import { toast } from "sonner";
 
 export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
   return (
-    <Sidebar>
+    <Sidebar className="pl-3">
       <SidebarHeader />
-      <Link to={'/'} className="text-4xl">Logo</Link>
+      <Link to={'/'} className="text-4xl z-30 py-3">Logo</Link>
       <SidebarContent>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -41,7 +41,7 @@ export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
           <div>
             <Button
 
-              className="mx-auto"
+              className="mx-auto mt-5"
               onClick={() => {
                 Cookies.remove("token");
                 Cookies.remove("role");

@@ -18,7 +18,7 @@ export const MainLayout = () => {
     return (
         <SidebarProvider>
             <AppSidebar role={role} />
-            <main>
+            <main className="pl-2">
                 <SidebarTrigger />
                 <Outlet />
             </main>

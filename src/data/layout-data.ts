@@ -3,28 +3,28 @@ import { Calendar, Home, Inbox, Search, Settings, Camera } from "lucide-react";
 export const links = {
     admin: [
         {
-            title: "Home",
-            url: "#",
+            title: "Statistica",
+            url: "/app/admin",
             icon: Home,
         },
         {
-            title: "Inbox",
-            url: "#",
+            title: "Teacher",
+            url: "/app/admin/teacher",
             icon: Inbox,
         },
         {
-            title: "Calendar",
-            url: "#",
+            title: "Student",
+            url: "/app/admin/student",
             icon: Calendar,
         },
         {
-            title: "Search",
-            url: "#",
+            title: "Profile",
+            url: "/app/admin/profile",
             icon: Search,
         },
         {
             title: "Settings",
-            url: "#",
+            url: "/app/admin/settings",
             icon: Settings,
         },
     ],
