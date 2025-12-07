@@ -1,29 +1,26 @@
-import { Route, Routes } from 'react-router-dom'
-import { Login } from './pages/auth/login/login'
-import { Register } from './pages/auth/login/register'
-import { MainLayout } from './layout/main-layout'
-import { Statistica } from './pages/admin/statistica/statistica'
-import adminPath from './router/admin-router'
-import { NotFound } from './pages/not-found'
+import { Route, Routes } from "react-router-dom"
+import { Login } from "./pages/auth/login"
+import { Register } from "./pages/auth/register"
+import { MainLayout } from "./layout/main-layout"
+import { Statistic } from "./pages/admin/statistic/statistic"
 
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/app' element={<MainLayout />} >
-          <Route path='admin' >
-            <Route index element={<Statistica />} />
-            {adminPath.map(({ page: Page, path }) => (
-              <Route key={path} path={path} element={<Page />} />
-            ))}
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/app" element={<MainLayout />}>
+          <Route path="admin">
+
           </Route>
-          <Route path='teacher' />
+          <Route index element={<Statistic />} />
+          <Route path="teacher">
+
+          </Route>
         </Route>
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      </Routes >
     </>
   )
 }
