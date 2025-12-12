@@ -13,12 +13,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import type { ColumnDef } from "@tanstack/react-table";
+import { PaginationJump } from "./components/button";
 
 export const Teacher = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { data, isLoading, isFetching } = useTeachersListPagination(searchParams.get('page') || '1');
     const { close, open, isOpen } = useToggle()
-    const buttons = Array(data?.totalPages || 1).fill(null)
+    // const buttons = Array(data?.totalPages || 1).fill(null)
     const { close: close2, isOpen: isOpen2, open: open2 } = useToggle();
     const [editId, setEditID] = React.useState("");
 
@@ -160,20 +161,12 @@ export const Teacher = () => {
                     {isFetching || isLoading ? (
                         <Skeleton className="h-[30px] w-[300px]" />
                     ) : (
-                        <div className="flex justify-end gap-3 mt-5">
-                            {buttons.map((_, index) => (
-                                <Button
-                                    onClick={() => {
-                                        setSearchParams({ page: `${index + 1}` });
-                                    }}
-                                    variant={
-                                        index + 1 === data?.currentPage ? "default" : "outline"
-                                    }
-                                >
-                                    {index + 1}
-                                </Button>
-                            ))}
-                        </div>
+                        <PaginationJump
+                            currentPage={data?.currentPage as number}
+                            totalPages={data?.totalPages as number}
+                            setSearchParams={setSearchParams}
+                        />
+
                     )}
 
                 </div>

@@ -10,7 +10,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { items } from "./data/sidebar"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import Cookies from 'js-cookie'
 import { toast } from 'sonner'
@@ -19,7 +19,7 @@ import { toast } from 'sonner'
 
 export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
     const navigate = useNavigate();
-
+    const { pathname } = useLocation();
     return (
         <Sidebar>
             <SidebarContent>
@@ -31,16 +31,28 @@ export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </a>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
+                            {items.map((item) => {
+                                const isActive = pathname === item.url;
+
+                                return (
+                                    <SidebarMenuItem key={item.title}>
+                                        <SidebarMenuButton
+                                            asChild
+                                            className={
+                                                "flex items-center gap-2 " +
+                                                (isActive
+                                                    ? "bg-green-500 text-white py-4.5"
+                                                    : "hover:bg-muted py-4.5")
+                                            }
+                                        >
+                                            <Link to={item.url}>
+                                                <item.icon />
+                                                <span>{item.title}</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+                                );
+                            })}
                         </SidebarMenu>
                     </SidebarGroupContent>
                     <Button className='bg-green-500 mt-5 hover:bg-amber-500'
