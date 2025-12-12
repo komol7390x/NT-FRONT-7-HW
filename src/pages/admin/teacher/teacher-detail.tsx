@@ -22,32 +22,32 @@ export const TeacherDetail = () => {
 
 
     const uploadIMage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
         const maxSize = 5 * 1024 * 1024;
-        if (e.target?.files) {
-            if (maxSize < e.target?.files[0].size) {
-                toast("File hajmi katta", {
-                    position: "bottom-right",
-                });
-            } else {
-                const formData = new FormData();
-                formData.append("file", e.target.files[0]);
-                mutate(formData, {
-                    onSuccess: () => {
-                        client.invalidateQueries({ queryKey: ["teacher", id] });
-                        toast("OK", {
-                            position: "bottom-right",
-                        });
-                    },
-                    onError: (err) => {
-                        console.log(err, "error");
-                    },
-                });
-            }
+
+        if (file.size > maxSize) {
+            toast("File hajmi katta!", { position: "bottom-right" });
+            return;
         }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        mutate(formData, {
+            onSuccess: () => {
+                client.invalidateQueries({ queryKey: ["teacher", id] });
+                toast("Rasm yangilandi!", { position: "bottom-right" });
+            },
+            onError: () => {
+                toast("Rasm yuklashda xatolik!", { position: "bottom-right" });
+            },
+        });
     };
 
     return (
-        <div>
+        <div className="pl-5">
             {isLoading ? (
                 <Spinner />
             ) : (
