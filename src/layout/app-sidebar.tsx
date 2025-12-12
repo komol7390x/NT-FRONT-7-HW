@@ -9,7 +9,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { items } from "./data/sidebar"
+import { AdminItems, TeacherItems } from "./data/sidebar"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import Cookies from 'js-cookie'
@@ -20,6 +20,7 @@ import { toast } from 'sonner'
 export function AppSidebar({ role }: { role: "admin" | "teacher" }) {
     const navigate = useNavigate();
     const { pathname } = useLocation();
+    const items = role == 'admin' ? AdminItems : TeacherItems
     return (
         <Sidebar>
             <SidebarContent>
