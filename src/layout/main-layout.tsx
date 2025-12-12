@@ -14,7 +14,7 @@ export const MainLayout = () => {
     <div>
       <SidebarProvider>
         <AppSidebar role={role as 'admin' | 'teacher'} />
-        <main>
+        <main className="w-full">
           <SidebarTrigger />
           <Outlet />
         </main>
