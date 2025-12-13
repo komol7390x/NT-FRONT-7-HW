@@ -19,7 +19,6 @@ export const Teacher = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { data, isLoading, isFetching } = useTeachersListPagination(searchParams.get('page') || '1');
     const { close, open, isOpen } = useToggle()
-    // const buttons = Array(data?.totalPages || 1).fill(null)
     const { close: close2, isOpen: isOpen2, open: open2 } = useToggle();
     const [editId, setEditID] = React.useState("");
 

@@ -5,6 +5,7 @@ import { MainLayout } from "./layout/main-layout"
 import { Statistic } from "./pages/admin/statistic/statistic"
 import adminRouter from './router/admin.router'
 import teacherRouter from './router/teacher.router'
+import { TeacherDetail } from "./pages/teacher/teacher/teacher-detail"
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
           </Route>
 
           <Route path="teacher">
+            <Route index element={<TeacherDetail />} />
             {teacherRouter.map(({ page: Page, path }) => (
               <Route path={path} element={<Page />} key={path} />
             ))}

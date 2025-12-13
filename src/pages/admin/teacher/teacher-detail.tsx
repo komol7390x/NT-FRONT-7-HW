@@ -80,16 +80,16 @@ export const TeacherDetail = () => {
                             />
                         </div>
                     ) : (
-                        <>
+                        <div className="flex flex-col gap-5">
                             <Button
                                 className="rounded-full border h-[90px] w-[90px]"
                                 variant={"ghost"}
                             >
                                 <UserIcon className="size-16" />
                             </Button>
-                            <label htmlFor="upload_image">Upload image</label>
-                            <input id="upload_image" type="file" />
-                        </>
+                            <label htmlFor="upload_image" className="hover:text-green-600">Upload image</label>
+                            <input id="upload_image" type="file" className=" hidden" />
+                        </div>
                     )}
                     <TeacherForm
                         closeModal={closeModal}

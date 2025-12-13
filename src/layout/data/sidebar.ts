@@ -1,4 +1,4 @@
-import { Settings, LineChart, Users, Baby, Group } from "lucide-react"
+import { Settings, LineChart, Users, Baby, Group, User } from "lucide-react"
 
 
 export const AdminItems = [
@@ -30,6 +30,11 @@ export const AdminItems = [
 ]
 
 export const TeacherItems = [
+    {
+        title: "Teacher",
+        url: "/app/teacher",
+        icon: User,
+    },
     {
         title: "Groups",
         url: "/app/teacher/groups",
