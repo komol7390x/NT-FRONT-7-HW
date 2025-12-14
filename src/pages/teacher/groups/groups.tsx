@@ -8,15 +8,15 @@ import {
 } from "@/components/ui/table";
 import { useGroupsList } from "./service/useGroupsList";
 import { Spinner } from "@/components/ui/spinner";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const Groups = () => {
     const { data, isPending } = useGroupsList();
-    const groups = data?.data || [];
-
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const page = Number(searchParams.get("page")) || 1;
     const limit = 5;
+    const groups = data?.data || [];
     const totalPages = Math.ceil(groups.length / limit);
     const paginatedGroups = groups.slice(
         (page - 1) * limit,
@@ -45,7 +45,11 @@ export const Groups = () => {
 
                         <TableBody>
                             {paginatedGroups.map((item, index) => (
-                                <TableRow key={item.id} className="hover:bg-green-500 hover:text-white cursor-pointer">
+                                <TableRow
+                                    key={item.id}
+                                    className="hover:bg-green-500 hover:text-white cursor-pointer"
+                                    onClick={() => navigate(`/app/teacher/group-of-students/${item.id}`)}
+                                >
                                     <TableCell className="text-center font-medium border">
                                         {(page - 1) * limit + index + 1}
                                     </TableCell>

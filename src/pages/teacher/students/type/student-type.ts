@@ -10,6 +10,7 @@ export interface IGroup {
     createdAt: string;
     updatedAt: string;
     deletedAt: string | null;
+    students: IStudent[]
 }
 export interface IStudent {
     id: string;
@@ -17,7 +18,6 @@ export interface IStudent {
     email: string;
     role: "student" | "teacher" | "admin";
     groupId: string;
-
     avatarUrl: string;
     url: string | null;
     behavior: string | null;
@@ -25,7 +25,6 @@ export interface IStudent {
     group: IGroup;
     isActive: boolean;
     isDeleted: boolean;
-
     createdAt: string;
     updatedAt: string;
     deletedAt: string | null;
