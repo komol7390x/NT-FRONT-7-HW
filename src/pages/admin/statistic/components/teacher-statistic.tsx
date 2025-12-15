@@ -19,8 +19,9 @@ export function TeacherStatistic() {
       label: "Groups",
     },
   } as ChartConfig;
+  console.log(data?.data);
 
-  const chartData2 = data?.data.map((item) => {
+  const chartData2 = data?.data?.map((item) => {
     chartConfig[item.objectName] = {
       label: item.teacherName,
       color: item.colorClass,
@@ -45,7 +46,7 @@ export function TeacherStatistic() {
         >
           <PieChart>
             <ChartTooltip content={<ChartTooltipContent nameKey="groups" />} />
-            <Pie className="border" data={chartData2} dataKey="groups"  />
+            <Pie className="border" data={chartData2} dataKey="groups" />
 
             <ChartLegend
               content={<ChartLegendContent nameKey="teacher" />}

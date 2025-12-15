@@ -15,7 +15,7 @@ export const Students = () => {
     const page = Number(searchParams.get("page")) || 1;
     const limit = 10;
     const { isPending, data } = useStudentList()
-    const students = data?.data.sort((a, b) =>
+    const students = data?.data?.sort((a, b) =>
         a.name.localeCompare(b.name)
     ) || [];
 

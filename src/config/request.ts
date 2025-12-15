@@ -3,7 +3,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export const request = axios.create({
-    baseURL: 'http://localhost:3030/api/v1'
+    baseURL: 'https://049de3e7d73d.ngrok-free.app/api/v1',
 });
 
 request.interceptors.request.use((config) => {
@@ -25,7 +25,7 @@ request.interceptors.response.use(
             originalRequest._retry = true;
             try {
                 const response = await axios.post<LoginResponse>(
-                    'http://localhost:3030/api/v1'
+                    'https://049de3e7d73d.ngrok-free.app/api/v1'
                 )
                 const newAccessToken = response.data.data.token;
                 Cookies.set('token', newAccessToken);
